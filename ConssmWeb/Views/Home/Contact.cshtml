@@ -1,0 +1,54 @@
+﻿@model ConssmWeb.Models.ContactViewModel
+@using  BotDetect.Web.Mvc
+
+@{
+    ViewData["Title"] = "Contact";
+    var contactCaptcha = new MvcCaptcha("ContactCaptcha") { UserInputID = "CaptchaCode" };
+}
+
+<div class="row">
+    <h4 class="col-md-4 col-md-offset-4">Contact</h4>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form asp-action="Contact" asp->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ConfirmationEmail" /> @Html.DisplayNameFor(model => model.ConfirmationEmail)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaptchaCode" class="control-label"></label>
+                <input asp-for="CaptchaCode" class="form-control" />
+                <captcha mvc-captcha="contactCaptcha" class="form-control" />
+                <span asp-validation-for="CaptchaCode" class="text-danger"></span>
+            </div>
+            <div class="text-danger">
+                @Html.ValidationSummary(true)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Trimite" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
